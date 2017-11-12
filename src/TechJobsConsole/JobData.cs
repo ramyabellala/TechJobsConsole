@@ -36,6 +36,8 @@ namespace TechJobsConsole
                     values.Add(aValue);
                 }
             }
+            //Sort data in alphabetical order
+            values.Sort();
             return values;
         }
 
