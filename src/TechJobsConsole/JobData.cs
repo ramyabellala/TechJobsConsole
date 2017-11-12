@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System;
 
 namespace TechJobsConsole
 {
@@ -48,8 +49,9 @@ namespace TechJobsConsole
             foreach (Dictionary<string, string> row in AllJobs)
             {
                 string aValue = row[column];
+                string upperaValue = aValue.ToUpper();
 
-                if (aValue.Contains(value))
+                if (upperaValue.Contains(value.ToUpper()))
                 {
                     jobs.Add(row);
                 }
@@ -138,5 +140,32 @@ namespace TechJobsConsole
 
             return rowValues.ToArray();
         }
+
+
+        public static List<Dictionary<string, string>> FindByValue(string value)
+        {
+            // load data, if not already loaded
+            LoadData();
+
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+            foreach (Dictionary<string, string> row in AllJobs)
+            {
+
+                foreach (KeyValuePair<string, string> jobItem in row)
+                {
+                    string aValue = jobItem.Value;
+                    string upperaValue = aValue.ToUpper();
+                    if (upperaValue.Contains(value.ToUpper()))
+                    {
+                        jobs.Add(row);
+                        break;
+                    }
+                }
+
+            }
+
+            return jobs;
+        }
+
     }
 }
